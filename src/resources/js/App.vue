@@ -1,9 +1,8 @@
 <script setup>
-import { ref } from 'vue';
-
-const message = ref('Hello world');
+import Header from './components/Header.vue';
 </script>
 
 <template>
-    <h1>{{ message }}</h1>
+    <Header />
+    <router-view></router-view>
 </template>

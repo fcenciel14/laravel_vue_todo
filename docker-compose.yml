@@ -37,7 +37,7 @@ services:
             - db:/var/lib/mysql
         environment:
             - MYSQL_ROOT_PASSWORD=root
-            - MYSQL_DATABASE=laravel_event
+            - MYSQL_DATABASE=laravel_vue_todo
         ports:
             - 3306:3306
 

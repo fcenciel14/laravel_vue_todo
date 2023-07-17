@@ -1,4 +1,8 @@
+<script setup>
+import Button from './Button.vue';
+</script>
+
 <template>
-    <router-link to="/tasks">タスク一覧</router-link>
-    <router-link to="/tasks/create">タスク追加</router-link>
+    <Button link="/tasks" color="#0000CD" name="Task List" class="mr-5" />
+    <Button link="/tasks/create" color="#0000CD" name="Add Task" />
 </template>

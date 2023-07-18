@@ -1,25 +1,24 @@
 <script setup>
+import { ref, onMounted } from 'vue';
 import Button from './Button.vue';
-const tasks = [
-    {
-        id: 1,
-        title: 'Tmp Title1',
-        content: 'Tmp Content1',
-        pic: 'Tmp PIC1',
-    },
-    {
-        id: 2,
-        title: 'Tmp Title2',
-        content: 'Tmp Content2',
-        pic: 'Tmp PIC2',
-    },
-    {
-        id: 3,
-        title: 'Tmp Title3',
-        content: 'Tmp Content3',
-        pic: 'Tmp PIC3',
-    },
-];
+
+const tasks = ref({});
+
+function getTasks() {
+    fetch('http://localhost:80/api/tasks')
+        .then((res) => res.json())
+        .then((json) => (tasks.value = json));
+}
+
+onMounted(() => {
+    getTasks();
+});
+
+function deleteTask(id) {
+    fetch(`http://localhost:80/api/tasks/${id}`, {
+        method: 'DELETE',
+    }).then((res) => getTasks());
+}
 </script>
 
 <template>
@@ -43,7 +42,7 @@ const tasks = [
                 <td>{{ task.pic }}</td>
                 <td><Button :link="`/tasks/${task.id}`" name="Detail" /></td>
                 <td><Button :link="`/tasks/${task.id}/edit`" color="#006400" name="Edit" /></td>
-                <td><Button color="#FF0000" name="Delete" /></td>
+                <td><Button color="#FF0000" name="Delete" @click="deleteTask(task.id)" /></td>
             </tr>
         </tbody>
     </v-table>

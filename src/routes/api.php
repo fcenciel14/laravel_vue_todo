@@ -15,8 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/tasks', [TaskController::class, 'index']);
-Route::post('/tasks', [TaskController::class, 'store']);
+// Route::get('/tasks', [TaskController::class, 'index']);
+// Route::post('/tasks', [TaskController::class, 'store']);
+Route::resource('/tasks', TaskController::class)
+    ->except(['create', 'edit']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
